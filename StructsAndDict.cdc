@@ -1,29 +1,29 @@
-pub contract Mycontract {
+pub contract Authentication {
+
+    pub var profiles: {Address: Profile}
     
-    pub struct MyStruct {
-        pub var1: String
-        pub var2: Int 
+    pub struct Profile {
+        pub let firstName: String
+        pub let lastName: String
+        pub let favNum: Integer
+        pub let account: Address
+
+        // You have to pass in 4 arguments when creating this Struct.
+        init(_firstName: String, _lastName: String, _favNum: Integer, _account: Address) {
+            self.firstName = _firstName
+            self.lastName = _lastName
+            self.favNum = _favNum
+            self.account = _account
+        }
     }
 
-    pub var myArray : [MyStruct]
-
-    pub var myDict : {String: MyStruct}
-
-    pub fun addStructToArray(var1: String, var2: Int):  {
-        let newStruct = MyStruct(var1: var1, var2: var2)
-        self.myArray.append(newStruct)
+    pub fun addProfile(firstName: String, lastName: String, favNum : Integer, account: Address) {
+        let newProfile = Profile(_firstName: firstName, _lastName: lastName, _favNum: favNum, _account: account)
+        self.profiles[account] = newProfile
     }
 
-    pub fun addStructToDict(key: String, var1: String, var2: Int) {
-        let newStruct = MyStruct(var1: var1, var2: var2)
-        self.myDict[key] = newStruct
+    init() {
+        self.profiles = {}
     }
 
-    pub fun getStructFromArray(index: Int): MyStruct {
-        return self.myArray[index]
-    }
-
-    pub fun getStructFromDict(key: String): MyStruct? {
-        return self.myDict[key]
-    }
 }
