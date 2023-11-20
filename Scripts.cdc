@@ -1,14 +1,5 @@
-import MyContract from 0x<contract-address>
+import Authentication from 0x05
 
-transaction {
-    prepare(acct : AuthAccount){
-        acct.contracts.getMyContract().addStructToArray(var1 : "Hello", var2: 9797)
-    }
-}
-
-script {
-    let myStruct = getAccount(0x<contract-address>).getMyContract().getStructFromArray(index : 0)
-    log(myStruct : var1)
-    log(myStruct : var2)
-  
+pub fun main(account: Address): Authentication.Profile {
+    return Authentication.profiles[account]!
 }
